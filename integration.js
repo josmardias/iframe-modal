@@ -2,6 +2,9 @@ var Integration = (function () {
   var _Integration = {};
 
   var iframeId = "integration";
+  var userAgent = navigator.userAgent || "";
+  var isIOS8 = /(os 8).*(applewebkit)/i.test(userAgent);
+  var isSafari = /Version\/[\d\.]+.*Safari/.test(userAgent);
 
   var PageState = (function (argument) {
     var restoreObj = {
@@ -75,6 +78,14 @@ var Integration = (function () {
 
     PageState.changeBodyProp("overflow", "hidden");
     PageState.addBodyClass("integration-noscroll");
+
+    if (isIOS8) {
+      PageState.addBodyClass("integration-ios8");
+    }
+    if (isSafari) {
+      PageState.addBodyClass("integration-safari");
+    }
+
     document.body.appendChild(iframe);
 
     return this;
