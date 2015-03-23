@@ -16,3 +16,8 @@ iframe#integration {
   background: rgba(0, 0, 0, 0.00392157);
   overflow: hidden;
 }
+
+body.integration-noscroll {
+  position: fixed;
+  overflow-y: scroll;
+}
