@@ -9,8 +9,25 @@
 }
 
 hr {
-  border-top: 100px solid rgba(56, 52, 85, 0.3);
-  border-bottom: 100px solid rgba(56, 52, 85, 0.3);
+  border-top: 20px solid rgba(56, 52, 85, 0.3);
+  border-bottom: 20px solid rgba(56, 52, 85, 0.3);
   border-right: 0;
   border-left: 0;
 }
+
+button {
+  height: 50px;
+  width: 100px;
+  border-color: #5ca941;
+  background-color: #60b044;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.15);
+  font-size: 13px;
+  vertical-align: middle;
+  border-radius: 3px;
+  font-weight: bold;
+  font-family: sans-serif;
+  margin: 0 auto;
+  display: block;
+}
+
