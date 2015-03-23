@@ -32,7 +32,8 @@ var Integration = (function () {
     _PageState.addEventListener = function (el, eventName, callback) {
       el.addEventListener("eventName", callback);
       restoreObj.eventListener.push({
-        el: el, callback: callback
+        el: el,
+        callback: callback
       });
     };
 
@@ -61,7 +62,6 @@ var Integration = (function () {
 
     return _PageState;
   })();
-
 
   _Integration.init = function (accessId) {
     var iframe = document.createElement("iframe");
@@ -95,7 +95,7 @@ var Integration = (function () {
     PageState.restore();
     var iframe = document.getElementById(iframeId);
     var parent = iframe.parentNode;
-    if(!parent) {
+    if (!parent) {
       return this;
     }
     parent.removeChild(iframe);
@@ -104,3 +104,4 @@ var Integration = (function () {
 
   return _Integration;
 })();
+
