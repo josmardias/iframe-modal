@@ -1,21 +1,33 @@
 var Integration = (function () {
-  Lib = {};
+  var _Integration = {};
 
   var iframeId = "integration";
 
-  var _restore = {
-    body: {}
-  };
+  var PageState = (function (argument) {
+    var restoreObj = {
+      body: {}
+    };
 
-  var restore = function () {
-    for (i in _restore.body) {
-      document.body[i] = _restore.body[i];
-      delete _restore.body[i];
-    }
-    return this;
-  };
+    var _PageState = {};
 
-  Lib.init = function (accessId) {
+    _PageState.changeBodyProp = function (key, value) {
+      restoreObj.body.key = document.body.value;
+      document.body.key = value;
+    };
+
+    _PageState.restore = function () {
+      for (i in restoreObj.body) {
+        document.body[i] = restoreObj.body[i];
+        delete restoreObj.body[i];
+      }
+      return this;
+    };
+
+    return _PageState;
+  })();
+
+
+  _Integration.init = function (accessId) {
     var iframe = document.createElement("iframe");
     var props = {
       scrolling: "no",
@@ -28,15 +40,14 @@ var Integration = (function () {
       iframe[i] = props[i];
     }
 
-    _restore.body.overflow = document.body.overflow;
-    document.body.overflow = "hidden";
+    PageState.changeBodyProp("overflow", "hidden");
     document.body.appendChild(iframe);
 
     return this;
   };
 
-  Lib.close = function () {
-    restore();
+  _Integration.close = function () {
+    PageState.restore();
     var iframe = document.getElementById(iframeId);
     var parent = iframe.parentNode;
     if(!parent) {
@@ -46,5 +57,5 @@ var Integration = (function () {
     return this;
   }
 
-  return Lib;
+  return _Integration;
 })();
