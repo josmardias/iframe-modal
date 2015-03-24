@@ -4,5 +4,10 @@
     event.preventDefault();
   });
 
+  $("#close").on("click", function (event) {
+    event.preventDefault();
+    Panel.close();
+  });
+
 })(jQuery, jQuery);
 

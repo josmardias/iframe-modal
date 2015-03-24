@@ -88,6 +88,29 @@ var Integration = (function () {
     return _PageState;
   })();
 
+  var Message = (function (argument) {
+    var _Message = {};
+
+    var messageCallback = function (event) {
+      /* TODO: check origin url
+      if (event.origin !== originUrl) {
+          return;
+      }
+      */
+      if (event.data === "integration:close") {
+        setTimeout(function () {
+          Integration.close();
+        }, 0);
+      }
+    };
+
+    _Message.listen = function () {
+      PageState.addEventListener(window, "message", messageCallback);
+    };
+
+    return _Message;
+  })();
+
   _Integration.init = function (accessId) {
     var iframe = document.createElement("iframe");
     var props = {
@@ -114,6 +137,8 @@ var Integration = (function () {
     }
 
     document.body.appendChild(iframe);
+
+    Message.listen();
 
     return this;
   };

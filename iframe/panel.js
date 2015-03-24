@@ -1,4 +1,11 @@
-(function ($, jQuery, undefined) {
+var Panel = (function () {
+  var _Panel = {};
 
-})(jQuery, jQuery);
+  _Panel.close = function (argument) {
+    parent.postMessage("integration:close", "*");
+    return this;
+  };
+
+  return _Panel;
+})();
 
