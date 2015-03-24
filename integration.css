@@ -7,8 +7,7 @@ iframe#integration {
   height: 100%;
   min-height: 500px;
   z-index: 9999;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow: hidden;
   margin: 0;
   padding: 0;
   border: 0 none transparent;
@@ -36,7 +35,7 @@ body.integration-noscroll {
 }
 
 body.integration-noscroll.integration-ios8 {
-
+  /*position: fixed;*/
 }
 
 body.integration-noscroll.integration-ios8.integration-safari {
