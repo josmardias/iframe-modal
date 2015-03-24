@@ -18,15 +18,15 @@ iframe#integration {
 }
 
 body.integration-ios8 iframe#integration {
-  position: absolute;
+
 }
 
 body.integration-ios8.integration-safari iframe#integration {
+  position: absolute;
   min-height: 0;
 }
 
 body.integration-noscroll {
-  position: fixed;
   height: 100%;
   overflow: hidden;
   margin: 0;
@@ -35,7 +35,7 @@ body.integration-noscroll {
 }
 
 body.integration-noscroll.integration-ios8 {
-  /*position: fixed;*/
+
 }
 
 body.integration-noscroll.integration-ios8.integration-safari {
