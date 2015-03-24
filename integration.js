@@ -22,6 +22,7 @@ var Integration = (function () {
     _PageState.changeBodyProp = function (key, value) {
       restoreObj.bodyProp[key] = document.body.value;
       document.body[key] = value;
+      return this;
     };
 
     _PageState.addBodyClass = function (value) {
@@ -31,6 +32,7 @@ var Integration = (function () {
       }
       restoreObj.bodyClass.push(value);
       elementClassList.add(value);
+      return this;
     };
 
     _PageState.addEventListener = function (el, eventName, callback) {
@@ -44,6 +46,7 @@ var Integration = (function () {
         eventName: eventName,
         callback: callback
       });
+      return this;
     };
 
     _PageState.setScroll = function () {
@@ -52,6 +55,7 @@ var Integration = (function () {
       }
       restoreObj.scroll.x = window.scrollX;
       restoreObj.scroll.y = window.scrollY;
+      return this;
     };
 
     _PageState.restore = function () {
@@ -83,6 +87,8 @@ var Integration = (function () {
       if (window.scroll && (!scrollX || !scrollY)) {
         window.scroll(scrollX, scrollY);
       }
+
+      return this;
     };
 
     return _PageState;
@@ -104,6 +110,7 @@ var Integration = (function () {
 
     _Message.listen = function () {
       PageState.addEventListener(window, "message", messageCallback);
+      return this;
     };
 
     return _Message;
