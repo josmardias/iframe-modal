@@ -34,9 +34,14 @@ var Integration = (function () {
     };
 
     _PageState.addEventListener = function (el, eventName, callback) {
-      el.addEventListener("eventName", callback);
+      if (window.addEventListener){
+        el.addEventListener(eventName, callback, false);
+      } else {
+        attachEvent("on" + eventName, callback)
+      }
       restoreObj.eventListener.push({
         el: el,
+        eventName: eventName,
         callback: callback
       });
     };
@@ -68,7 +73,11 @@ var Integration = (function () {
 
       for (i in restoreObj.eventListener) {
         listener = restoreObj.eventListener.pop();
-        listener.el.removeEventListener(listener.callback);
+        if (listener.el.removeEventListener) {
+          listener.el.removeEventListener(listener.eventName, listener.callback);
+        } else {
+          listener.el.detachEvent("on" + listener.eventName, listener.callback); 
+        }
       }
 
       if (window.scroll && (!scrollX || !scrollY)) {
