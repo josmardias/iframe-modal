@@ -116,7 +116,7 @@ var Integration = (function () {
     return _Message;
   })();
 
-  function createIframe () {
+  function createIframe (accessId) {
     var iframe = document.createElement("iframe");
     var props = {
       scrolling: "no",
@@ -147,7 +147,7 @@ var Integration = (function () {
       PageState.addBodyClass("integration-safari");
     }
 
-    createIframe();
+    createIframe(accessId);
 
     return this;
   };
