@@ -97,7 +97,7 @@ var Integration = (function () {
       var bodyClass;
       var scrollX = restoreObj.scroll.x;
       var scrollY = restoreObj.scroll.y;
-      var customViewportTag = document.getElementById(viewportId)
+      var viewportTag = document.querySelector("meta[name=viewport]");
 
       for (i in restoreObj.bodyProp) {
         document.body[i] = restoreObj.bodyProp[i];
@@ -118,10 +118,9 @@ var Integration = (function () {
         }
       }
 
-      if (customViewportTag) {
-        document.head.removeChild(customViewportTag);
-      } else {
-        document.querySelector("meta[name=viewport]").setAttribute("content", restoreObj.viewport);
+      if (viewportTag) {
+        viewportTag.setAttribute("content", restoreObj.viewport || "width=980, user-scalable=yes");
+        restoreObj.viewport = null;
       }
 
       if (window.scroll && (!scrollX || !scrollY)) {
