@@ -98,9 +98,7 @@ var Integration = (function () {
       }
       */
       if (event.data === "integration:close") {
-        setTimeout(function () {
-          Integration.close();
-        }, 0);
+        Integration.close();
       }
     };
 
