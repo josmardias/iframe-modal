@@ -24,8 +24,8 @@ body.integration-ios8.integration-safari iframe#integration {
 }
 
 body.integration-noscroll {
-  position: fixed;
-  overflow-y: hidden;
+  /*position: fixed;*/
+  overflow: hidden;
 }
 
 body.integration-ios8.integration-safari {

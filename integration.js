@@ -55,6 +55,8 @@ var Integration = (function () {
       var i;
       var listener;
       var bodyClass;
+      var scrollX = restoreObj.scroll.x;
+      var scrollY = restoreObj.scroll.y;
 
       for (i in restoreObj.bodyProp) {
         document.body[i] = restoreObj.bodyProp[i];
@@ -71,8 +73,8 @@ var Integration = (function () {
         listener.el.removeEventListener(listener.callback);
       }
 
-      if (window.scroll) {
-        window.scroll(restoreObj.scroll.x, restoreObj.scroll.y);
+      if (window.scroll && (!scrollX || !scrollY)) {
+        window.scroll(scrollX, scrollY);
       }
     };
 
