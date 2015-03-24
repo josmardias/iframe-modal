@@ -91,7 +91,7 @@ var Integration = (function () {
   var Message = (function (argument) {
     var _Message = {};
 
-    var messageCallback = function (event) {
+    function messageCallback (event) {
       /* TODO: check origin url
       if (event.origin !== originUrl) {
           return;
