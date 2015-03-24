@@ -144,11 +144,11 @@ var Integration = (function () {
   _Integration.close = function () {
     PageState.restore();
     var iframe = document.getElementById(iframeId);
-    var parent = iframe.parentNode;
-    if (!parent) {
+    var iframeParent = iframe.parentNode;
+    if (!iframeParent) {
       return this;
     }
-    parent.removeChild(iframe);
+    iframeParent.removeChild(iframe);
     return this;
   }
 
