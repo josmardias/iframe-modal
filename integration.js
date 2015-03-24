@@ -10,7 +10,11 @@ var Integration = (function () {
     var restoreObj = {
       bodyProp: {},
       bodyClass: [],
-      eventListener: []
+      eventListener: [],
+      scroll: {
+        x: 0,
+        y: 0
+      }
     };
 
     var _PageState = {};
@@ -37,6 +41,16 @@ var Integration = (function () {
       });
     };
 
+    _PageState.setScroll = function () {
+      if (!window.scrollX && !window.scrollY) {
+        console.log("setscroll return", window.scrollX, window.scrollY);
+        return;
+      }
+      restoreObj.scroll.x = window.scrollX;
+      restoreObj.scroll.y = window.scrollY;
+      console.log("actual scroll:", restoreObj.scroll);
+    };
+
     _PageState.restore = function () {
       var i;
       var listener;
@@ -57,7 +71,9 @@ var Integration = (function () {
         listener.el.removeEventListener(listener.callback);
       }
 
-      return this;
+      if (window.scroll) {
+        window.scroll(restoreObj.scroll.x, restoreObj.scroll.y);
+      }
     };
 
     return _PageState;
@@ -75,6 +91,8 @@ var Integration = (function () {
     for (i in props) {
       iframe[i] = props[i];
     }
+
+    PageState.setScroll(); // must be before adding body classes
 
     PageState.changeBodyProp("overflow", "hidden");
     PageState.addBodyClass("integration-noscroll");
