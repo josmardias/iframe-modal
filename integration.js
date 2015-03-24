@@ -43,12 +43,10 @@ var Integration = (function () {
 
     _PageState.setScroll = function () {
       if (!window.scrollX && !window.scrollY) {
-        console.log("setscroll return", window.scrollX, window.scrollY);
         return;
       }
       restoreObj.scroll.x = window.scrollX;
       restoreObj.scroll.y = window.scrollY;
-      console.log("actual scroll:", restoreObj.scroll);
     };
 
     _PageState.restore = function () {
