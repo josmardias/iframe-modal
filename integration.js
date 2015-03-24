@@ -109,7 +109,7 @@ var Integration = (function () {
     return _Message;
   })();
 
-  _Integration.init = function (accessId) {
+  function createIframe () {
     var iframe = document.createElement("iframe");
     var props = {
       scrolling: "no",
@@ -121,6 +121,12 @@ var Integration = (function () {
     for (i in props) {
       iframe[i] = props[i];
     }
+
+    document.body.appendChild(iframe);
+    Message.listen();
+  };
+
+  _Integration.init = function (accessId) {
 
     PageState.setScroll(); // must be before adding body classes
 
@@ -134,9 +140,7 @@ var Integration = (function () {
       PageState.addBodyClass("integration-safari");
     }
 
-    document.body.appendChild(iframe);
-
-    Message.listen();
+    createIframe();
 
     return this;
   };
