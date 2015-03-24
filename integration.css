@@ -30,7 +30,7 @@ body.integration-noscroll {
   overflow: hidden;
 }
 
-body.integration-ios8.integration-safari {
-  position: static;
+body.integration-noscroll.integration-ios8.integration-safari {
+
 }
 
