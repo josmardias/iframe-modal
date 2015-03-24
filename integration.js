@@ -89,35 +89,6 @@ var Integration = (function () {
       document.head.appendChild(el);
 
       return this;
-
-      /*var
-
-      var el = restoreObj.viewport.original;
-      var props;
-
-      if (!restoreObj.viewport.usingOriginal) {
-        return;
-      }
-
-      restoreObj.viewport.original = el || ;
-
-      el = document.createElement("meta");
-      props = {
-        name: "viewport",
-        content: "width=device-width, initial-scale=1",
-        id: viewportId;
-      };
-      for (i in props) {
-        el[i] = props[i];
-      }
-
-      restoreObj.viewport.created = el;
-
-      document.head.appendChild(el);
-      document.head.removeChild(restoreObj.viewport.original);
-
-      return this;
-      */
     };
 
     _PageState.restore = function () {
