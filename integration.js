@@ -2,6 +2,7 @@ var Integration = (function () {
   var _Integration = {};
 
   var iframeId = "integration";
+  var viewportId = "integration-viewport";
   var userAgent = navigator.userAgent || "";
   var isIOS8 = /(os 8).*(applewebkit)/i.test(userAgent);
   var isSafari = /Version\/[\d\.]+.*Safari/.test(userAgent);
@@ -14,7 +15,8 @@ var Integration = (function () {
       scroll: {
         x: 0,
         y: 0
-      }
+      },
+      viewport: null
     };
 
     var _PageState = {};
@@ -58,12 +60,73 @@ var Integration = (function () {
       return this;
     };
 
+    _PageState.addViewportMetaTag = function () {
+      var i;
+      var el;
+      var props = {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
+        id: viewportId
+      };
+
+      if (restoreObj.viewport) {
+        return;
+      }
+
+      el = document.querySelector("meta[name=viewport]");
+
+      if (el) {
+        restoreObj.viewport = el.getAttribute("content");
+        el.setAttribute("content", props.content);
+        return this;
+      }
+
+      el = document.createElement("meta");
+      for (i in props) {
+        el[i] = props[i];
+      }
+
+      document.head.appendChild(el);
+
+      return this;
+
+      /*var
+
+      var el = restoreObj.viewport.original;
+      var props;
+
+      if (!restoreObj.viewport.usingOriginal) {
+        return;
+      }
+
+      restoreObj.viewport.original = el || ;
+
+      el = document.createElement("meta");
+      props = {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
+        id: viewportId;
+      };
+      for (i in props) {
+        el[i] = props[i];
+      }
+
+      restoreObj.viewport.created = el;
+
+      document.head.appendChild(el);
+      document.head.removeChild(restoreObj.viewport.original);
+
+      return this;
+      */
+    };
+
     _PageState.restore = function () {
       var i;
       var listener;
       var bodyClass;
       var scrollX = restoreObj.scroll.x;
       var scrollY = restoreObj.scroll.y;
+      var customViewportTag = document.getElementById(viewportId)
 
       for (i in restoreObj.bodyProp) {
         document.body[i] = restoreObj.bodyProp[i];
@@ -82,6 +145,12 @@ var Integration = (function () {
         } else {
           listener.el.detachEvent("on" + listener.eventName, listener.callback); 
         }
+      }
+
+      if (customViewportTag) {
+        document.head.removeChild(customViewportTag);
+      } else {
+        document.querySelector("meta[name=viewport]").setAttribute("content", restoreObj.viewport);
       }
 
       if (window.scroll && (!scrollX || !scrollY)) {
@@ -139,6 +208,7 @@ var Integration = (function () {
 
     PageState.changeBodyProp("overflow", "hidden");
     PageState.addBodyClass("integration-noscroll");
+    PageState.addViewportMetaTag();
 
     if (isIOS8) {
       PageState.addBodyClass("integration-ios8");
