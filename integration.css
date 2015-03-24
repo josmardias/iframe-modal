@@ -27,7 +27,16 @@ body.integration-ios8.integration-safari iframe#integration {
 }
 
 body.integration-noscroll {
+  position: fixed;
+  height: 100%;
   overflow: hidden;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+body.integration-noscroll.integration-ios8 {
+
 }
 
 body.integration-noscroll.integration-ios8.integration-safari {
