@@ -3,9 +3,6 @@ var Integration = (function () {
 
   var iframeId = "integration";
   var viewportId = "integration-viewport";
-  var userAgent = navigator.userAgent || "";
-  var isIOS8 = /(os 8).*(applewebkit)/i.test(userAgent);
-  var isSafari = /Version\/[\d\.]+.*Safari/.test(userAgent);
 
   var PageState = (function (argument) {
     var _restoreObj = {
@@ -155,6 +152,39 @@ var Integration = (function () {
     return _Message;
   })();
 
+  var Browser = (function () {
+    var _Browser = {};
+
+    var _userAgent;
+    var _isIOS8;
+    var _isSafari;
+
+    _Browser.getUserAgent = function () {
+      if (_userAgent === undefined) {
+        _userAgent = navigator.userAgent || "";
+      }
+      return _userAgent;
+    };
+
+    _Browser.isIOS8 = function () {
+      var userAgent = this.getUserAgent();
+      if (_isIOS8 === undefined) {
+        _isIOS8 = /(os 8).*(applewebkit)/i.test(userAgent);
+      }
+      return _isIOS8;
+    };
+
+    _Browser.isSafari = function () {
+      var userAgent = this.getUserAgent();
+      if (_isSafari === undefined) {
+        _isSafari = /Version\/[\d\.]+.*Safari/.test(userAgent);
+      }
+      return _isSafari;
+    };
+
+    return _Browser;
+  })();
+
   function createIframe (accessId) {
     var iframe = document.createElement("iframe");
     var props = {
@@ -180,10 +210,10 @@ var Integration = (function () {
     PageState.addBodyClass("integration-noscroll");
     PageState.addViewportMetaTag();
 
-    if (isIOS8) {
+    if (Browser.isIOS8()) {
       PageState.addBodyClass("integration-ios8");
     }
-    if (isSafari) {
+    if (Browser.isSafari()) {
       PageState.addBodyClass("integration-safari");
     }
 
@@ -203,6 +233,7 @@ var Integration = (function () {
     return this;
   }
 
+  _Integration.Browser = Browser;
   return _Integration;
 })();
 
