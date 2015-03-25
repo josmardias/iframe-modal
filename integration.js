@@ -8,7 +8,7 @@ var Integration = (function () {
   var isSafari = /Version\/[\d\.]+.*Safari/.test(userAgent);
 
   var PageState = (function (argument) {
-    var restoreObj = {
+    var _restoreObj = {
       bodyProp: {},
       bodyClass: [],
       eventListener: [],
@@ -22,7 +22,7 @@ var Integration = (function () {
     var _PageState = {};
 
     _PageState.changeBodyProp = function (key, value) {
-      restoreObj.bodyProp[key] = document.body.value;
+      _restoreObj.bodyProp[key] = document.body.value;
       document.body[key] = value;
       return this;
     };
@@ -32,7 +32,7 @@ var Integration = (function () {
       if (elementClassList.contains(value)) {
         return;
       }
-      restoreObj.bodyClass.push(value);
+      _restoreObj.bodyClass.push(value);
       elementClassList.add(value);
       return this;
     };
@@ -43,7 +43,7 @@ var Integration = (function () {
       } else {
         attachEvent("on" + eventName, callback)
       }
-      restoreObj.eventListener.push({
+      _restoreObj.eventListener.push({
         el: el,
         eventName: eventName,
         callback: callback
@@ -55,8 +55,8 @@ var Integration = (function () {
       if (!window.scrollX && !window.scrollY) {
         return;
       }
-      restoreObj.scroll.x = window.scrollX;
-      restoreObj.scroll.y = window.scrollY;
+      _restoreObj.scroll.x = window.scrollX;
+      _restoreObj.scroll.y = window.scrollY;
       return this;
     };
 
@@ -69,14 +69,14 @@ var Integration = (function () {
         id: viewportId
       };
 
-      if (restoreObj.viewport) {
+      if (_restoreObj.viewport) {
         return;
       }
 
       el = document.querySelector("meta[name=viewport]");
 
       if (el) {
-        restoreObj.viewport = el.getAttribute("content");
+        _restoreObj.viewport = el.getAttribute("content");
         el.setAttribute("content", props.content);
         return this;
       }
@@ -95,22 +95,22 @@ var Integration = (function () {
       var i;
       var listener;
       var bodyClass;
-      var scrollX = restoreObj.scroll.x;
-      var scrollY = restoreObj.scroll.y;
+      var scrollX = _restoreObj.scroll.x;
+      var scrollY = _restoreObj.scroll.y;
       var viewportTag = document.querySelector("meta[name=viewport]");
 
-      for (i in restoreObj.bodyProp) {
-        document.body[i] = restoreObj.bodyProp[i];
-        delete restoreObj.bodyProp[i];
+      for (i in _restoreObj.bodyProp) {
+        document.body[i] = _restoreObj.bodyProp[i];
+        delete _restoreObj.bodyProp[i];
       }
 
-      for (i in restoreObj.bodyClass) {
-        bodyClass = restoreObj.bodyClass.pop();
+      for (i in _restoreObj.bodyClass) {
+        bodyClass = _restoreObj.bodyClass.pop();
         document.body.classList.remove(bodyClass);
       }
 
-      for (i in restoreObj.eventListener) {
-        listener = restoreObj.eventListener.pop();
+      for (i in _restoreObj.eventListener) {
+        listener = _restoreObj.eventListener.pop();
         if (listener.el.removeEventListener) {
           listener.el.removeEventListener(listener.eventName, listener.callback);
         } else {
@@ -119,8 +119,8 @@ var Integration = (function () {
       }
 
       if (viewportTag) {
-        viewportTag.setAttribute("content", restoreObj.viewport || "width=980, user-scalable=yes");
-        restoreObj.viewport = null;
+        viewportTag.setAttribute("content", _restoreObj.viewport || "width=980, user-scalable=yes");
+        _restoreObj.viewport = null;
       }
 
       if (window.scroll && (!scrollX || !scrollY)) {
