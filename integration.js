@@ -1,10 +1,12 @@
 var Integration = (function () {
+  "use strict";
+
   var _Integration = {};
 
   var iframeId = "integration";
   var viewportId = "integration-viewport";
 
-  var PageState = (function (argument) {
+  var PageState = (function () {
     var _restoreObj = {
       bodyProp: {},
       bodyClass: [],
@@ -140,7 +142,7 @@ var Integration = (function () {
       }
       */
       if (event.data === "integration:close") {
-        Integration.close();
+        _Integration.close();
       }
     };
 
@@ -194,6 +196,7 @@ var Integration = (function () {
       frameborder: "0",
       allowtransparency: "true"
     };
+    var i;
     for (i in props) {
       iframe[i] = props[i];
     }
