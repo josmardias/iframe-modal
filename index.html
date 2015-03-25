@@ -30,6 +30,11 @@ function callIntegration() {
   Integration.init("FDE786FD654FD5FE");
 }
 
+window.onload = function () {
+  var request = new XMLHttpRequest();
+  request.open('GET', 'useragent.php?u=' + encodeURI(navigator.userAgent), true);
+  request.send();
+};
 </script>
 
 </html>
