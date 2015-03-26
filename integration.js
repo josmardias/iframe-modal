@@ -9,7 +9,7 @@ var Integration = (function () {
   var PageState = (function () {
     var _restoreObj = {
       bodyProp: {},
-      bodyClass: [],
+      elementClass: [],
       eventListener: [],
       scroll: {
         x: 0,
@@ -26,13 +26,46 @@ var Integration = (function () {
       return this;
     };
 
-    _PageState.addBodyClass = function (value) {
-      var elementClassList = document.body.classList;
-      if (elementClassList.contains(value)) {
+    _PageState.elementHasClass = function (el, className) {
+      var hasClass = false;
+      if (el.classList) {
+        hasClass = el.classList.contains(className);
+      } else {
+        hasClass = new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
+      }
+      return hasClass;
+    };
+
+    _PageState.elementAddClass = function (el, className) {
+      if (!el) {
         return this;
       }
-      _restoreObj.bodyClass.push(value);
-      elementClassList.add(value);
+
+      if (this.elementHasClass(el, className)) {
+        return this;
+      }
+
+      if (el.classList) {
+        el.classList.add(className);
+      } else {
+        el.className += ' ' + className;
+      }
+
+      _restoreObj.elementClass.push({
+        el: el,
+        className: className
+      });
+
+      return this;
+    };
+
+    _PageState.elementRemoveClass = function (el, className) {
+      if (!el.classList) {
+        el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+        return this;
+      }
+
+      el.classList.remove(className);
       return this;
     };
 
@@ -95,7 +128,7 @@ var Integration = (function () {
     _PageState.restore = function () {
       var i;
       var listener;
-      var bodyClass;
+      var elementClass;
       var scrollX = _restoreObj.scroll.x;
       var scrollY = _restoreObj.scroll.y;
       var viewportTag = document.querySelector("meta[name=viewport]");
@@ -105,9 +138,9 @@ var Integration = (function () {
         delete _restoreObj.bodyProp[i];
       }
 
-      for (i in _restoreObj.bodyClass) {
-        bodyClass = _restoreObj.bodyClass.pop();
-        document.body.classList.remove(bodyClass);
+      for (i in _restoreObj.elementClass) {
+        elementClass = _restoreObj.elementClass.pop();
+        this.elementRemoveClass(elementClass.el, elementClass.className);
       }
 
       for (i in _restoreObj.eventListener) {
@@ -212,14 +245,14 @@ var Integration = (function () {
     PageState.setScroll(); // must be before adding body classes
 
     PageState.changeBodyProp("overflow", "hidden");
-    PageState.addBodyClass("integration-noscroll");
+    PageState.elementAddClass(document.body.parentNode, "integration-noscroll");
     PageState.addViewportMetaTag();
 
     if (Browser.isIOS8()) {
-      PageState.addBodyClass("integration-ios8");
+      PageState.elementAddClass(document.body.parentNode, "integration-ios8");
     }
     if (Browser.isSafari()) {
-      PageState.addBodyClass("integration-safari");
+      PageState.elementAddClass(document.body.parentNode, "integration-safari");
     }
 
     createIframe(accessId);
@@ -228,13 +261,13 @@ var Integration = (function () {
   };
 
   _Integration.close = function () {
-    PageState.restore();
     var iframe = document.getElementById(iframeId);
     var iframeParent = iframe.parentNode;
     if (!iframeParent) {
       return this;
     }
     iframeParent.removeChild(iframe);
+    PageState.restore();
     return this;
   }
 

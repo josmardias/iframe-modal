@@ -1,6 +1,8 @@
+/* iframe */
+
 iframe#integration {
   display: block;
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   width: 100%;
@@ -17,31 +19,22 @@ iframe#integration {
   visibility: visible;
   -webkit-tap-highlight-color: transparent;
   background: rgba(0, 0, 0, 0.00392157);
-  overflow: hidden;
 }
 
-body.integration-ios8 iframe#integration {
-
-}
-
-body.integration-ios8.integration-safari iframe#integration {
-  position: absolute;
+html.integration-ios8.integration-safari iframe#integration {
   min-height: 0;
 }
 
-body.integration-noscroll {
+/* html and body */
+
+html.integration-noscroll,
+html.integration-noscroll > body {
+  position: relative;
   height: 100%;
+  width: 100%;
   overflow: hidden;
   margin: 0;
   border: 0;
   padding: 0;
-}
-
-body.integration-noscroll.integration-ios8 {
-
-}
-
-body.integration-noscroll.integration-ios8.integration-safari {
-
 }
 
