@@ -1,9 +1,15 @@
-<html>
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js gt-ie9" lang="en"> <!--<![endif]-->
 
 <head>
   <title>iframe</title>
+  <!--[if lt IE 10]> <base href="http://127.0.0.1:9876/iframe/" /> <![endif]-->
+  <!--[if gt IE 9]><!--> <base href="./iframe/" /> <!--<![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="/iframe/">
   <link href="normalize.css" rel="stylesheet" type="text/css" />
   <link href="panel.css" rel="stylesheet" type="text/css" />
   <link href="layout.css" rel="stylesheet" type="text/css" />
@@ -28,12 +34,11 @@
     </label>
     <input type="submit" />
   </form>
+
+  <script src="jquery-1.11.2.min.js"></script>
+  <script src="panel.js"></script>
+  <script src="app.js"></script>
 </body>
-
-
-<script src="jquery-1.11.2.min.js"></script>
-<script src="panel.js"></script>
-<script src="app.js"></script>
 
 </html>
 
