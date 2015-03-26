@@ -70,7 +70,7 @@ var Integration = (function () {
     };
 
     _PageState.addEventListener = function (el, eventName, callback) {
-      if (window.addEventListener){
+      if (window.addEventListener) {
         el.addEventListener(eventName, callback, false);
       } else {
         attachEvent("on" + eventName, callback)
@@ -148,7 +148,7 @@ var Integration = (function () {
         if (listener.el.removeEventListener) {
           listener.el.removeEventListener(listener.eventName, listener.callback);
         } else {
-          listener.el.detachEvent("on" + listener.eventName, listener.callback); 
+          listener.el.detachEvent("on" + listener.eventName, listener.callback);
         }
       }
 
@@ -170,7 +170,7 @@ var Integration = (function () {
   var Message = (function (argument) {
     var _Message = {};
 
-    function messageCallback (event) {
+    function messageCallback(event) {
       /* TODO: check origin url
       if (event.origin !== originUrl) {
           return;
@@ -222,7 +222,7 @@ var Integration = (function () {
     return _Browser;
   })();
 
-  function createIframe (accessId) {
+  function createIframe(accessId) {
     var iframe = document.createElement("iframe");
     var props = {
       scrolling: "no",
