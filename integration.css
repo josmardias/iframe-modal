@@ -1,8 +1,7 @@
 /* html and body */
 
-html.integration-noscroll,
+html.integration-noscroll.integration-ios8,
 html.integration-noscroll > body {
-  position: relative;
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -11,11 +10,16 @@ html.integration-noscroll > body {
   padding: 0;
 }
 
+html.integration-noscroll.integration-ios8,
+html.integration-noscroll.integration-ios8 > body {
+  position: relative;
+}
+
 /* iframe */
 
 iframe#integration {
   display: block;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
@@ -34,7 +38,8 @@ iframe#integration {
   background: rgba(0, 0, 0, 0.00392157);
 }
 
-html.integration-ios8.integration-safari iframe#integration {
+html.integration-ios8 iframe#integration {
   min-height: 0;
+  position: absolute;
 }
 
