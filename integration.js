@@ -29,7 +29,7 @@ var Integration = (function () {
     _PageState.addBodyClass = function (value) {
       var elementClassList = document.body.classList;
       if (elementClassList.contains(value)) {
-        return;
+        return this;
       }
       _restoreObj.bodyClass.push(value);
       elementClassList.add(value);
@@ -52,7 +52,7 @@ var Integration = (function () {
 
     _PageState.setScroll = function () {
       if (!window.scrollX && !window.scrollY) {
-        return;
+        return this;
       }
       _restoreObj.scroll.x = window.scrollX;
       _restoreObj.scroll.y = window.scrollY;
@@ -69,7 +69,7 @@ var Integration = (function () {
       };
 
       if (_restoreObj.viewport) {
-        return;
+        return this;
       }
 
       el = document.querySelector("meta[name=viewport]");
