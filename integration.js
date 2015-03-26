@@ -138,12 +138,12 @@ var Integration = (function () {
         delete _restoreObj.bodyProp[i];
       }
 
-      for (i in _restoreObj.elementClass) {
+      while (_restoreObj.elementClass.length > 0) {
         elementClass = _restoreObj.elementClass.pop();
         this.elementRemoveClass(elementClass.el, elementClass.className);
       }
 
-      for (i in _restoreObj.eventListener) {
+      while (_restoreObj.eventListener.length > 0) {
         listener = _restoreObj.eventListener.pop();
         if (listener.el.removeEventListener) {
           listener.el.removeEventListener(listener.eventName, listener.callback);
