@@ -1,3 +1,16 @@
+/* html and body */
+
+html.integration-noscroll,
+html.integration-noscroll > body {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
 /* iframe */
 
 iframe#integration {
@@ -23,18 +36,5 @@ iframe#integration {
 
 html.integration-ios8.integration-safari iframe#integration {
   min-height: 0;
-}
-
-/* html and body */
-
-html.integration-noscroll,
-html.integration-noscroll > body {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  margin: 0;
-  border: 0;
-  padding: 0;
 }
 
