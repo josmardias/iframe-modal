@@ -62,6 +62,7 @@ var Integration = (function () {
     _PageState.addViewportMetaTag = function () {
       var i;
       var el;
+      var headNode;
       var props = {
         name: "viewport",
         content: "width=device-width, initial-scale=1",
@@ -85,7 +86,8 @@ var Integration = (function () {
         el[i] = props[i];
       }
 
-      document.head.appendChild(el);
+      headNode = document.head || document.getElementsByTagName('head')[0];
+      headNode.appendChild(el);
 
       return this;
     };
