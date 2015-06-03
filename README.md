@@ -8,3 +8,7 @@ There is a transparent mask behind the modal (within the iframe).
 It handles ios8 "position: fixed" issue.
 
 Tested on iOS8 (both Safari and Chrome), android 4.4.4 (Chrome) and Linux/MacOS (Chrome and Safari)
+
+TODO:
+- lightbox blinking on iframe navigation on non SPA case
+- case: modal inside a container, instead of absolute position
